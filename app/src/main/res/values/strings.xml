@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">MapMarkersListApp</string>
+    <string name="google_map_geo_api_key_name">com.google.android.geo.API_KEY</string>
+</resources>
