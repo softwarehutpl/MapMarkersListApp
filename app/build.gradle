@@ -14,6 +14,11 @@ android {
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
+
+    dataBinding {
+        enabled = true
+    }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -27,6 +32,7 @@ ext {
     dagger_version = '2.14.1'
     gms_version = '11.8.0'
     gms_places_version = '16.0.0'
+    rx_version = '2.0.2'
 }
 
 dependencies {
@@ -38,6 +44,10 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
+
+    // RX
+    api "io.reactivex.rxjava2:rxandroid:$rx_version"
+    implementation 'com.jakewharton.rxrelay2:rxrelay:2.0.0'
 
     // DAGGER - DEPENDENCY INJECTION
     implementation "com.google.dagger:dagger:$dagger_version"
@@ -58,4 +68,8 @@ dependencies {
     // BINDING COLLECTION ADAPTER
     implementation 'me.tatarka.bindingcollectionadapter2:bindingcollectionadapter:2.3.0-beta3'
     implementation 'me.tatarka.bindingcollectionadapter2:bindingcollectionadapter-recyclerview:2.3.0-beta3'
+
+    // VIEW UTILS
+    api 'com.byoutline.secretsauce:secretsaucekt:0.7.0'
+    implementation 'androidx.core:core-ktx:0.3'
 }

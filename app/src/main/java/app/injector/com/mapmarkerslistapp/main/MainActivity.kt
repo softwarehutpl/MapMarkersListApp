@@ -1,13 +1,14 @@
 package app.injector.com.mapmarkerslistapp.main
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import app.injector.com.mapmarkerslistapp.R
+import app.injector.com.mapmarkerslistapp.base.BaseActivity
+import app.injector.com.mapmarkerslistapp.databinding.ActivityMainBinding
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity<MainView, MainViewModel, ActivityMainBinding>(), MainView {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setup(R.layout.activity_main, this, MainViewModel::class.java)
     }
 }
