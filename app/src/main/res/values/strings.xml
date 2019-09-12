@@ -1,4 +1,6 @@
 <resources>
     <string name="app_name">MapMarkersListApp</string>
     <string name="google_map_geo_api_key_name">com.google.android.geo.API_KEY</string>
+    <string name="main_map_tab_title">MAP</string>
+    <string name="main_map_list_tab_title">LIST</string>
 </resources>

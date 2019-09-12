@@ -8,6 +8,12 @@ import dagger.android.support.AndroidSupportInjection
 
 class MapFragment : BaseFragment<MapFragmentView, MapFragmentViewModel, FragmentMapBinding>(), MapFragmentView {
 
+    companion object {
+        fun newInstance() : MapFragment {
+            return MapFragment()
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         AndroidSupportInjection.inject(this)
         super.onCreate(savedInstanceState)

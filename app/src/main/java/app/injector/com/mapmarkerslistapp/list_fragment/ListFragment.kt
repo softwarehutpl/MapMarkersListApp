@@ -8,9 +8,15 @@ import dagger.android.support.AndroidSupportInjection
 
 class ListFragment : BaseFragment<ListFragmentView, ListFragmentViewModel, FragmentListBinding>(), ListFragmentView {
 
+    companion object {
+        fun newInstance() : ListFragment {
+            return ListFragment()
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         AndroidSupportInjection.inject(this)
         super.onCreate(savedInstanceState)
-        setup(R.layout.fragment_map, this, ListFragmentViewModel::class.java)
+        setup(R.layout.fragment_list, this, ListFragmentViewModel::class.java)
     }
 }

@@ -8,4 +8,9 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="tablayoutTextAppearance" parent="@android:style/TextAppearance.Small">
+        <item name="android:fontFamily">@font/notosans</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textStyle">bold</item>
+    </style>
 </resources>
