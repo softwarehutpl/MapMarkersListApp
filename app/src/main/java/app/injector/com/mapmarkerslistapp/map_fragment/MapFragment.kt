@@ -57,7 +57,7 @@ class MapFragment : BaseFragment<MapFragmentView, MapFragmentViewModel, Fragment
             googleMap.uiSettings.isMyLocationButtonEnabled = false
             googleMap.setMinZoomPreference(MIN_ZOOM_PREFFERENCE)
             googleMap.setOnCameraMoveListener(this)
-            //todo cluster manager
+            //todo load points
         }
         checkMyLocationEnablePermissions()
     }

@@ -6,7 +6,7 @@
 
         <import type="android.view.View"/>
 
-        <variable name="item" type="app.injector.com.mapmarkerslistapp.model.Point"/>
+        <variable name="item" type="app.injector.com.mapmarkerslistapp.room.model.Point"/>
 
     </data>
 

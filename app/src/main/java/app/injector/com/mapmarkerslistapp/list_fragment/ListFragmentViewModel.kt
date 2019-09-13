@@ -7,12 +7,13 @@ import app.injector.com.mapmarkerslistapp.base.BaseView
 import app.injector.com.mapmarkerslistapp.base.BaseViewModel
 import me.tatarka.bindingcollectionadapter2.ItemBinding
 import app.injector.com.mapmarkerslistapp.BR
-import app.injector.com.mapmarkerslistapp.model.Point
+import app.injector.com.mapmarkerslistapp.repositories.PointRepository
+import app.injector.com.mapmarkerslistapp.room.model.Point
 import javax.inject.Inject
 
 interface ListFragmentView : BaseView {}
 
-class ListFragmentViewModel @Inject constructor() : BaseViewModel<ListFragmentView>() {
+class ListFragmentViewModel @Inject constructor(private val pointRepository: PointRepository) : BaseViewModel<ListFragmentView>() {
 
     val items: ObservableList<Point> = ObservableArrayList()
 
