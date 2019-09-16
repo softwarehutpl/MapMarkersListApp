@@ -6,12 +6,12 @@ import android.os.Bundle
 import app.injector.com.mapmarkerslistapp.R
 import app.injector.com.mapmarkerslistapp.base.BaseFragment
 import app.injector.com.mapmarkerslistapp.databinding.FragmentMapBinding
+import app.injector.com.mapmarkerslistapp.room.model.Point
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
-import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.LatLngBounds
+import com.google.android.gms.maps.model.*
 import com.karumi.dexter.Dexter
 import com.karumi.dexter.MultiplePermissionsReport
 import com.karumi.dexter.PermissionToken
@@ -60,6 +60,24 @@ class MapFragment : BaseFragment<MapFragmentView, MapFragmentViewModel, Fragment
             //todo load points
         }
         checkMyLocationEnablePermissions()
+        clearAllMarkers()
+        viewModel.provideCachedPoints()
+    }
+
+    private fun clearAllMarkers() {
+        googleMap.clear()
+    }
+
+    override fun showCachedPointsOnTheMap(points: List<Point>) {
+        for (point in points) {
+            googleMap.addMarker(createMarker(point))
+        }
+    }
+
+    private fun createMarker(point : Point) : MarkerOptions {
+        val bitMapDescriptor = BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)
+        val markerOptions = MarkerOptions().position(LatLng(point.latitude, point.longitude)).icon(bitMapDescriptor)
+        return markerOptions
     }
 
     private fun checkMyLocationEnablePermissions() {
