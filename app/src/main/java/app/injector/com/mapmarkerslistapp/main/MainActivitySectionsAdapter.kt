@@ -46,4 +46,10 @@ class MainActivitySectionsAdapter(private val context : Context, private val fm 
         }
         return context.resources.getString(R.string.main_map_list_tab_title)
     }
+
+    fun checkTabAndUpdateList(position: Int) {
+        if (position == MARKERS_LIST_TAB_INDEX) {
+            listFragment.updatePointsList(mapFragment.getCurrentMapBounds())
+        }
+    }
 }

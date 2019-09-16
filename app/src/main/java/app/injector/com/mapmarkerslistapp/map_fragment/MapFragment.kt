@@ -57,7 +57,10 @@ class MapFragment : BaseFragment<MapFragmentView, MapFragmentViewModel, Fragment
             googleMap.uiSettings.isMyLocationButtonEnabled = false
             googleMap.setMinZoomPreference(MIN_ZOOM_PREFFERENCE)
             googleMap.setOnCameraMoveListener(this)
-            //todo load points
+            googleMap.setOnMapClickListener {
+                it -> print("Your location is: ${it.latitude} AND ${it.longitude}")
+                // DO STUFF WHEN MAP IS CLICKED
+            }
         }
         checkMyLocationEnablePermissions()
         clearAllMarkers()
@@ -110,5 +113,9 @@ class MapFragment : BaseFragment<MapFragmentView, MapFragmentViewModel, Fragment
 
     override fun onCameraMove() {
         visibleMapBounds = googleMap.projection.visibleRegion.latLngBounds
+    }
+
+    fun getCurrentMapBounds() : LatLngBounds {
+        return visibleMapBounds
     }
 }
