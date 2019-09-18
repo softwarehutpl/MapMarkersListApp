@@ -30,8 +30,7 @@ Simple mobile application for displaying markers on the map written in MVVM arch
 are currently visible on the map as list items. All selecting and choose points which fits to map bounds source code is:
 
 ```kotlin
-val items: ObservableList<Point> = ObservableArrayList()
-
+    val items: ObservableList<Point> = ObservableArrayList()
     val itemBinding = ItemBinding.of<Point>(BR.item , R.layout.list_fragment_item)
 
     fun updatePointsList(bounds : LatLngBounds) {
@@ -51,8 +50,66 @@ val items: ObservableList<Point> = ObservableArrayList()
     }
 ```
 
-- App contains created faked points, you can create your own, by fetching from f.g firebase and then convert to `Point.class` defined 
-in MapMarkersListApp (don't confuse with `com.google.maps.android.data.Point.class`) or changing points data in code below:
+- Object `LatLngBounds` it's a rectangle represents visible part of the map. To update bounds map fragment must implement `GoogleMap.OnCameraMoveListener` and  `OnMapReadyCallback` interface. Before update bounds we need to define our map:
+
+```kotlin
+    override fun onStart() {
+        super.onStart()
+        setupMap()
+    }
+
+    private fun setupMap() {
+        if (!::googleMap.isInitialized) {
+            val map = childFragmentManager.findFragmentById(R.id.map_container) as SupportMapFragment?
+            map!!.getMapAsync(this)
+        }
+    }
+```
+- After mapping `SupportMapFragment` object from layout xml file method `onMapReady` adjusting its features needed for the further features:
+
+```kotlin
+    private lateinit var googleMap: GoogleMap
+    
+    ...
+    
+    override fun onMapReady(map: GoogleMap?) {
+        if (!::googleMap.isInitialized) {
+            googleMap = map!!
+            googleMap.uiSettings.isZoomControlsEnabled = true
+            googleMap.uiSettings.isMyLocationButtonEnabled = false
+            googleMap.setMinZoomPreference(MIN_ZOOM_PREFFERENCE)
+            googleMap.setOnCameraMoveListener(this)
+            googleMap.setOnMapClickListener {
+                it -> print("Your location is: ${it.latitude} AND ${it.longitude}")
+                // DO STUFF WHEN MAP IS CLICKED
+            }
+        }
+        checkMyLocationEnablePermissions()
+        clearAllMarkers()
+        viewModel.provideCachedPoints()
+    }
+```
+
+- Our map is defined in `MapFragment` and with every move on the screen invoke code below:
+
+```kotlin
+   private lateinit var visibleMapBounds : LatLngBounds // definition of visible bounds
+
+   override fun onCameraMove() {
+        visibleMapBounds = googleMap.projection.visibleRegion.latLngBounds
+    }
+```
+- With visible bounds we can update list by pass visibleBounds to ListFragment through `SectionsAdapter` like below:
+
+```kotlin
+fun checkTabAndUpdateList(position: Int) {
+        if (position == MARKERS_LIST_TAB_INDEX) {
+            listFragment.updatePointsList(mapFragment.getCurrentMapBounds())
+        }
+    }
+```
+
+- App contains created faked points stored in local cache, you can create your own by fetching from f.g firebase and then convert to `Point.class` defined in MapMarkersListApp (don't confuse with `com.google.maps.android.data.Point.class`) or changing points data in code below:
 
 ```kotlin
 private fun createFakePoints() : List<Point> {
