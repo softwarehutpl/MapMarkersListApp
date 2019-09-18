@@ -57,6 +57,7 @@ class MapFragment : BaseFragment<MapFragmentView, MapFragmentViewModel, Fragment
             googleMap.uiSettings.isMyLocationButtonEnabled = false
             googleMap.setMinZoomPreference(MIN_ZOOM_PREFFERENCE)
             googleMap.setOnCameraMoveListener(this)
+            visibleMapBounds = googleMap.projection.visibleRegion.latLngBounds
             googleMap.setOnMapClickListener {
                 it -> print("Your location is: ${it.latitude} AND ${it.longitude}")
                 // DO STUFF WHEN MAP IS CLICKED
