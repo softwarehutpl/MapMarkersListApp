@@ -139,8 +139,7 @@ private fun createFakePoints() : List<Point> {
 ## Let's run the app
 - The result of the code above we can see on those screens. Although we defined 8 points as we can see after switching to list fragment there is a list only visible ones.
 
-[![INSERT YOUR GRAPHIC HERE](https://github.com/softwarehutpl/MapMarkersListApp/blob/master/images/list.JPG)]()
-[![INSERT YOUR GRAPHIC HERE](https://github.com/softwarehutpl/MapMarkersListApp/blob/master/images/map.JPG)]()
+<img src="https://github.com/softwarehutpl/MapMarkersListApp/blob/master/images/app.gif" width="300" height="600" />
 
 ## Summary
 - This simple app shows how you can retrieve and passing your coordinates between fragments. Of course you can change fake points coordinate to test app in your own location. Happy coding!
